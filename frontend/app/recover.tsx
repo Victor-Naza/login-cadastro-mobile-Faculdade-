@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   View,
   Text,
@@ -7,10 +7,12 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
-import { API_URL } from '../config';
-import { styles } from '../styles';
+import { useRouter } from 'expo-router';
+import { API_URL } from '../src/config';
+import { styles } from '../src/styles';
 
-export default function RecoverScreen({ onNavigate }) {
+export default function RecoverScreen() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -31,7 +33,7 @@ export default function RecoverScreen({ onNavigate }) {
         Alert.alert('Erro', data.message || 'Falha na recuperacao.');
       } else {
         Alert.alert('Sucesso', data.message, [
-          { text: 'OK', onPress: () => onNavigate('login') },
+          { text: 'OK', onPress: () => router.replace('/') },
         ]);
       }
     } catch (e) {
@@ -58,7 +60,7 @@ export default function RecoverScreen({ onNavigate }) {
         {loading ? <ActivityIndicator color="#fff" /> : <Text style={styles.buttonText}>Enviar</Text>}
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => onNavigate('login')}>
+      <TouchableOpacity onPress={() => router.replace('/')}>
         <Text style={styles.link}>Voltar ao login</Text>
       </TouchableOpacity>
     </View>

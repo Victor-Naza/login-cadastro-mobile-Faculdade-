@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   View,
   Text,
@@ -6,11 +6,14 @@ import {
   TouchableOpacity,
   Alert,
   ActivityIndicator,
+  Image,
 } from 'react-native';
-import { API_URL } from '../config';
-import { styles } from '../styles';
+import { Link, useRouter } from 'expo-router';
+import { API_URL } from '../src/config';
+import { styles } from '../src/styles';
 
-export default function LoginScreen({ onNavigate }) {
+export default function LoginScreen() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -42,7 +45,10 @@ export default function LoginScreen({ onNavigate }) {
 
   return (
     <View style={styles.card}>
-      <Text style={styles.title}>Entrar</Text>
+      <Image
+        source={require('../public/icon.png')}
+        style={styles.logo}
+      />
 
       <TextInput
         style={styles.input}
@@ -64,13 +70,17 @@ export default function LoginScreen({ onNavigate }) {
         {loading ? <ActivityIndicator color="#fff" /> : <Text style={styles.buttonText}>Entrar</Text>}
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => onNavigate('recover')}>
-        <Text style={styles.link}>Esqueci minha senha</Text>
-      </TouchableOpacity>
+      <Link href="/recover" asChild>
+        <TouchableOpacity>
+          <Text style={styles.link}>Esqueci minha senha</Text>
+        </TouchableOpacity>
+      </Link>
 
-      <TouchableOpacity onPress={() => onNavigate('register')}>
-        <Text style={styles.link}>Nao tem conta? Cadastre-se</Text>
-      </TouchableOpacity>
+      <Link href="/register" asChild>
+        <TouchableOpacity>
+          <Text style={styles.link}>Nao tem conta? Cadastre-se</Text>
+        </TouchableOpacity>
+      </Link>
     </View>
   );
 }

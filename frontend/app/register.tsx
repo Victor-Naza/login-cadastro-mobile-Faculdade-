@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   View,
   Text,
@@ -7,10 +7,12 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
-import { API_URL } from '../config';
-import { styles } from '../styles';
+import { useRouter } from 'expo-router';
+import { API_URL } from '../src/config';
+import { styles } from '../src/styles';
 
-export default function RegisterScreen({ onNavigate }) {
+export default function RegisterScreen() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -32,7 +34,7 @@ export default function RegisterScreen({ onNavigate }) {
         Alert.alert('Erro', data.message || 'Falha no cadastro.');
       } else {
         Alert.alert('Sucesso', data.message, [
-          { text: 'OK', onPress: () => onNavigate('login') },
+          { text: 'OK', onPress: () => router.replace('/') },
         ]);
       }
     } catch (e) {
@@ -66,7 +68,7 @@ export default function RegisterScreen({ onNavigate }) {
         {loading ? <ActivityIndicator color="#fff" /> : <Text style={styles.buttonText}>Cadastrar</Text>}
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => onNavigate('login')}>
+      <TouchableOpacity onPress={() => router.replace('/')}>
         <Text style={styles.link}>Ja tenho conta. Voltar ao login</Text>
       </TouchableOpacity>
     </View>

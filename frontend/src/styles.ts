@@ -16,6 +16,13 @@ export const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 2,
   },
+  logo: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    alignSelf: 'center',
+    marginBottom: 16,
+  },
   title: {
     fontSize: 26,
     fontWeight: '700',

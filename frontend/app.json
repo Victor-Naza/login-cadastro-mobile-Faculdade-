@@ -3,8 +3,10 @@
     "name": "Tela de Login",
     "slug": "tela-de-login",
     "version": "1.0.0",
+    "scheme": "teladelogin",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
+    "newArchEnabled": true,
     "splash": {
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
@@ -15,6 +17,10 @@
       "adaptiveIcon": {
         "backgroundColor": "#ffffff"
       }
+    },
+    "plugins": ["expo-router"],
+    "experiments": {
+      "typedRoutes": true
     }
   }
 }
